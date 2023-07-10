@@ -12,11 +12,13 @@ modules:
     description: |
       ARM processors are a competitor to the intel processors most of the dojo focuses on.
       Dominating the mobile computing space, these chips excel at power-efficient processing.
+      Recently, ARM processors can also be found in personal computers, with Apple's
+      M1 and M2 chips serving as notable examples.
+
       Unlike amd64, ARM assembly (aarch64) is a RISC architecture with a small number of fast
       instructions.  This module provides a short crash-course to get familiar with some of
       the key differences in aarch64.  Drawing directly from the "Assembly Crash Course" module
       where possible to highlight differences.
-
     challenges:
       - id: set-register
         name: Level1
@@ -60,3 +62,8 @@ modules:
       - id: fib
         name: Level14
         description: Write a fib function.
+    resources:
+      - name: "Helpful Resources"
+        type: markdown
+        content: |
+          - [Official ARMv8 Documentation](https://developer.arm.com/documentation/den0024/a/)
