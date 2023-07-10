@@ -79,7 +79,7 @@ class EmbryoARMBase:
     RSP_INIT = BASE_STACK + 0x200000
     BASE_ADDR = 0x400000
     CODE_OFFSET = 0
-    FLAG_PATH = "/Users/robwaz/flag"
+    FLAG_PATH = "/flag"
 
     DATA_OFFSET = 0x4000
     DATA_ADDR = BASE_ADDR + DATA_OFFSET
