@@ -1,0 +1,62 @@
+id: robwaz-dojo
+
+name: robwaz-dojo
+
+description: |
+  This dojo consists of misc topics that interest robwaz, but
+  aren't part of the core pwn.college curriculum.
+
+modules:
+  - id: into-to-arm
+    name: Introduction to ARM
+    description: |
+      ARM processors are a competitor to the intel processors most of the dojo focuses on.
+      Dominating the mobile computing space, these chips excel at power-efficient processing.
+      Unlike amd64, ARM assembly (aarch64) is a RISC architecture with a small number of fast
+      instructions.  This module provides a short crash-course to get familiar with some of
+      the key differences in aarch64.  Drawing directly from the "Assembly Crash Course" module
+      where possible to highlight differences.
+
+    challenges:
+      - id: set-register
+        name: Level1
+        description: Set a register value.
+      - id: set-register-large
+        name: Level2
+        description: Set a register to a large value.
+      - id: line-eq
+        name: Level3
+        description: Basic arithmetic.
+      - id: line-eq-single
+        name: Level4
+        description: Efficient arithmetic.
+      - id: mod
+        name: Level5
+        description: Perform a modulo operation.
+      - id: bitshift
+        name: Level6
+        description: Perform bitshift operations.
+      - id: mem-access
+        name: Level7
+        description: Loading and storing values.
+      - id: mem-access-pair
+        name: Level8
+        description: Loading and storing pairs.
+      - id: pop-push
+        name: Level9
+        description: Working with the stack.
+      - id: reg-swap
+        name: Level10
+        description: Swapping register values.
+      - id: mem-access-array
+        name: Level11
+        description: Compute a sum using the stack.
+      - id: mem-access-array-six
+        name: Level12
+        description: Efficiently compute a sum using the stack.
+      - id: jumps
+        name: Level13
+        description: The branch instruction.
+      - id: fib
+        name: Level14
+        description: Write a fib function.
