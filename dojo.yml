@@ -7,7 +7,7 @@ description: |
   aren't part of the core pwn.college curriculum.
 
 modules:
-  - id: into-to-arm
+  - id: intro-to-arm
     name: Introduction to ARM
     description: |
       ARM processors are a competitor to the intel processors most of the dojo focuses on.
