@@ -847,6 +847,7 @@ class EmbryoARMRegSwap(EmbryoARMBase):
     def trace(self):
         if len(self.asm) > 8:
             print(f"Only submit two aarch64 instruction!  {len(self.asm)} bytes received, but expecting 8!")
+            return False
 
         try:
             self.emu.reg_write(UC_ARM64_REG_X0, self.val_x0)
