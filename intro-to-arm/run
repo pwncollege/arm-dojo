@@ -710,6 +710,13 @@ class EmbryoARMMemoryAccessArraySixInstr(EmbryoARMBase):
             "Constraints:\n"
             "\t- You are allowed six instructions\n"
         )
+
+        print(
+            "Hints:\n"
+            "\t- Take advantage of pre/post indexing when possible.\n"
+            "\t- Use values where they are.\n"
+            "\t- Don't forget to place the result in x0.\n"
+        )
     def trace(self):
         if len(self.asm) > 24:
             print(f"Maximum 6 aarch64 instructions allowed!  {len(self.asm)} bytes received, but expecting <=24!")
