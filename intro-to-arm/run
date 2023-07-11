@@ -1,4 +1,5 @@
-#!/opt/pwn.college/python
+#!/usr/bin/env python3
+##!/opt/pwn.college/python
 
 import pathlib
 import random
@@ -763,7 +764,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
     def __init__(self, asm=None, should_debug=False):
         super().__init__(asm)
-        self.val_rdi = random.randint(10, 100000)
+        self.val_x0 = random.randint(10, 100000)
         self.val_stk = random.randint(1000000, 1000000000)
 
     def print_level_text(self):
@@ -792,7 +793,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
         print(
             "We will now set the following in preparation for your code:\n"
-            f"rdi = {hex(self.val_rdi)}\n"
+            f"X0 = {hex(self.val_x0)}\n"
             f"(stack) [{hex(self.BASE_STACK + 0x200000 - 0x8)}] = {hex(self.val_stk)}\n\n"
         )
 
@@ -801,8 +802,8 @@ class EmbryoARMPopPush(EmbryoARMBase):
             self.emu.mem_write(
                 self.BASE_STACK + 0x200000 - 0x8, struct.pack("<Q", self.val_stk)
             )
-            self.emu.reg_write(UC_X86_REG_RSP, self.BASE_STACK + 0x200000 - 0x8)
-            self.emu.reg_write(UC_X86_REG_RDI, self.val_rdi)
+            self.emu.reg_write(UC_ARM64_REG_SP, self.BASE_STACK + 0x200000 - 0x8)
+            self.emu.reg_write(UC_ARM64_REG_X0, self.val_x0)
             self.emu.emu_start(self.BASE_ADDR, self.BASE_ADDR + len(self.asm))
         except UcError as e:
             print("ERROR: %s" % e)
@@ -812,7 +813,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
             print(self.emu_err)
             return False
 
-        target = bytearray(struct.pack("<Q", self.val_stk - self.val_rdi))
+        target = bytearray(struct.pack("<Q", self.val_stk - self.val_x0))
         return target == self.emu.mem_read(self.BASE_STACK + 0x200000 - 0x8, 8)
 
 class EmbryoARMRegSwap(EmbryoARMBase):
@@ -840,8 +841,8 @@ class EmbryoARMRegSwap(EmbryoARMBase):
 
         print(
             "We will now set the following in preparation for your code:\n"
-            f"rdi = {hex(self.val_x0)}\n"
-            f"rsi = {hex(self.val_x1)}\n\n"
+            f"X0 = {hex(self.val_x0)}\n"
+            f"X1 = {hex(self.val_x1)}\n\n"
         )
 
     def trace(self):
