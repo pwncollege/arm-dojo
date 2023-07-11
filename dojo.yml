@@ -63,6 +63,31 @@ modules:
         name: Level14
         description: Write a fib function.
     resources:
+      - name: "General Tips"
+        type: markdown
+        content: |
+          The dojo box CPU is amd64 architecture.  Working with a non-native architecture has it's own unique challenges.
+
+          The simplest way to interact with these challenges is with a short pwntools script.
+          A template you can use is shown below.
+
+          ```
+          #!/usr/bin/env python3
+          from pwn import *
+          context.arch = 'aarch64'
+
+          asm_bytes = asm("""
+            PUT YOUR AARCH64 ASSEMBLY HERE
+            """)
+
+          with process('/challenge/run') as p:
+            p.send(asm_bytes)
+            p.stdin.close()
+            p.interactive()
+          "
+          ")
+          ```
+
       - name: "Helpful Resources"
         type: markdown
         content: |
