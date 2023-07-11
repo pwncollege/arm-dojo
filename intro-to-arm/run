@@ -1,18 +1,19 @@
+#!/usr/bin/env python3
 #!/opt/pwn.college/python
 
 import pathlib
 import random
 import struct
 import sys
+import pwn
 
 from typing import List, Optional
 
 from capstone import *
 from unicorn.arm64_const import *
 from unicorn import *
-from pwn import asm, context
 
-context.arch = 'aarch64'
+pwn.context.arch = 'aarch64'
 
 config = (pathlib.Path(__file__).parent / ".config").read_text()
 level = int(config)
@@ -887,7 +888,7 @@ class EmbryoARMJumps(EmbryoARMBase):
 
         self.exit_key = random.randint(0, 0xFFFF)
 
-        self.lib = asm(
+        self.lib = pwn.asm(
             f"""
             mov x0, #{self.exit_key}
             mov x8, #0x3c
@@ -1001,7 +1002,7 @@ class EmbryoARMFib(EmbryoARMBase):
     def unit_test_user_code(self, fib_arg):
 
         # movk is not needed, but for completeness
-        self.harness = asm(f"""
+        self.harness = pwn.asm(f"""
                             mov x3, #{hex(self.code_load_addr & 0xFFFFFFFF)}
                             movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFFFFFF)}, lsl 32
                             blr x3
