@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-##!/opt/pwn.college/python
+#!/opt/pwn.college/python
 
 import pathlib
 import random
