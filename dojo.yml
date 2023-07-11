@@ -84,8 +84,6 @@ modules:
             p.send(asm_bytes)
             p.stdin.close()
             p.interactive()
-          "
-          ")
           ```
 
       - name: "Helpful Resources"
