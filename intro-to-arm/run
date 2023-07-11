@@ -763,8 +763,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
     def __init__(self, asm=None, should_debug=False):
         super().__init__(asm)
-        self.val_x0 = random.randint(10, 100000)
-        self.val_stk = random.randint(1000000, 1000000000)
+        self.val_stk = [random.randint(1000000, 1000000000) for _ in range(8)]
 
     def print_level_text(self):
         print(
@@ -790,19 +789,13 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
         print("Please pop 8 QWORDS from the stack, compute their average, and push the result back onto the stack.\n")
 
-        print(
-            "We will now set the following in preparation for your code:\n"
-            f"X0 = {hex(self.val_x0)}\n"
-            f"(stack) [{hex(self.BASE_STACK + 0x200000 - 0x8)}] = {hex(self.val_stk)}\n\n"
-        )
-
     def trace(self):
         try:
+            print(self.val_stk)
             self.emu.mem_write(
-                self.BASE_STACK + 0x200000 - 0x8, struct.pack("<Q", self.val_stk)
+                self.BASE_STACK + 0x200000 - 0x48, struct.pack("<QQQQQQQQ", *self.val_stk)
             )
-            self.emu.reg_write(UC_ARM64_REG_SP, self.BASE_STACK + 0x200000 - 0x8)
-            self.emu.reg_write(UC_ARM64_REG_X0, self.val_x0)
+            self.emu.reg_write(UC_ARM64_REG_SP, self.BASE_STACK + 0x200000 - 0x48)
             self.emu.emu_start(self.BASE_ADDR, self.BASE_ADDR + len(self.asm))
         except UcError as e:
             print("ERROR: %s" % e)
@@ -812,8 +805,9 @@ class EmbryoARMPopPush(EmbryoARMBase):
             print(self.emu_err)
             return False
 
-        target = bytearray(struct.pack("<Q", self.val_stk - self.val_x0))
-        return target == self.emu.mem_read(self.BASE_STACK + 0x200000 - 0x8, 8)
+        target = bytearray(struct.pack("<Q", (sum(self.val_stk) // 8)))
+        sp = self.emu.reg_read(UC_ARM64_REG_SP)
+        return target == self.emu.mem_read(sp, 8)
 
 class EmbryoARMRegSwap(EmbryoARMBase):
     """
