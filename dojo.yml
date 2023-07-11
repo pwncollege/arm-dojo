@@ -52,10 +52,10 @@ modules:
         description: Swapping register values.
       - id: mem-access-array
         name: Level11
-        description: Compute a sum using the stack.
+        description: Compute a sum from an array.
       - id: mem-access-array-six
         name: Level12
-        description: Efficiently compute a sum using the stack.
+        description: Efficiently compute a sum from an array.
       - id: jumps
         name: Level13
         description: The branch instruction.
