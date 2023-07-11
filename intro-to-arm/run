@@ -10,7 +10,9 @@ from typing import List, Optional
 from capstone import *
 from unicorn.arm64_const import *
 from unicorn import *
-import pwnlib.asm
+from pwn import asm, context
+
+context.arch = 'aarch64'
 
 config = (pathlib.Path(__file__).parent / ".config").read_text()
 level = int(config)
