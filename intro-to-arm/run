@@ -775,7 +775,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
             "popping the stack would be of the form:\n"
             "\tldr x1, [sp], #16\n\n"
-            "This loads the value located at the stack pointer into register x1 and then subtracts 16 from the stack.\n\n"
+            "This loads the value located at the stack pointer into register x1 and then adds 16 to the stack.\n\n"
 
             "Pushing to the stack would be of the form\n"
             "\tstr x1, [sp, #-16]!\n\n"
