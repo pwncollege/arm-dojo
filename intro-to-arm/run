@@ -11,7 +11,6 @@ from capstone import *
 from unicorn.arm64_const import *
 from unicorn import *
 import pwnlib.asm
-from keystone import Ks, KS_ARCH_ARM64, KS_MODE_LITTLE_ENDIAN, KsError
 
 config = (pathlib.Path(__file__).parent / ".config").read_text()
 level = int(config)
@@ -884,14 +883,13 @@ class EmbryoARMJumps(EmbryoARMBase):
 
         self.exit_key = random.randint(0, 0xFFFF)
 
-        ks = Ks(KS_ARCH_ARM64, KS_MODE_LITTLE_ENDIAN)
-        self.lib = bytes(ks.asm(
+        self.lib = asm(
             f"""
             mov x0, #{self.exit_key}
             mov x8, #0x3c
             svc #1337
             """
-        )[0])
+        )
 
     def stop_hook(self, uc, address, size, user_data):
         x8 = uc.reg_read(UC_ARM64_REG_X8)
@@ -998,14 +996,12 @@ class EmbryoARMFib(EmbryoARMBase):
 
     def unit_test_user_code(self, fib_arg):
 
-        ks = Ks(KS_ARCH_ARM64, KS_MODE_LITTLE_ENDIAN)
-
         # movk is not needed, but for completeness
-        self.harness = bytes(ks.asm(f"""
+        self.harness = asm(f"""
                             mov x3, #{hex(self.code_load_addr & 0xFFFFFFFF)}
                             movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFFFFFF)}, lsl 32
                             blr x3
-                            """)[0])
+                            """)
 
         self.create_emu()
 
