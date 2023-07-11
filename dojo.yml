@@ -66,7 +66,7 @@ modules:
       - name: "General Tips"
         type: markdown
         content: |
-          The dojo box CPU is amd64 architecture.  Working with a non-native architecture has it's own unique challenges.
+          The dojo box CPU is amd64 architecture.  Working with a non-native architecture has its own unique challenges.
 
           The simplest way to interact with these challenges is with a short pwntools script.
           A template you can use is shown below.
