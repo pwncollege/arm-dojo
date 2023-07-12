@@ -13,7 +13,7 @@ from capstone import *
 from unicorn.arm64_const import *
 from unicorn import *
 
-pwnlib.context.arch = 'aarch64'
+pwnlib.context.context.update(arch = 'aarch64')
 
 config = (pathlib.Path(__file__).parent / ".config").read_text()
 level = int(config)
@@ -888,7 +888,7 @@ class EmbryoARMJumps(EmbryoARMBase):
 
         self.exit_key = random.randint(0, 0xFFFF)
 
-        self.lib = pwn.asm(
+        self.lib = pwnlib.asm.asm(
             f"""
             mov x0, #{self.exit_key}
             mov x8, #0x3c
@@ -1002,7 +1002,7 @@ class EmbryoARMFib(EmbryoARMBase):
     def unit_test_user_code(self, fib_arg):
 
         # movk is not needed, but for completeness
-        self.harness = pwn.asm(f"""
+        self.harness = pwnlib.asm.asm(f"""
                             mov x3, #{hex(self.code_load_addr & 0xFFFFFFFF)}
                             movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFFFFFF)}, lsl 32
                             blr x3
