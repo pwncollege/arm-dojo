@@ -979,7 +979,7 @@ class EmbryoARMFib(EmbryoARMBase):
             "The saved frame pointer is stored in a special frame register fr (aka x29).\n\n"
 
             "Given the role of x29 and x30, it is common to see a function prologue similar to:\n"
-            "\tstp x29, x30, [sp, #48]!\n"
+            "\tstp x29, x30, [sp, #-48]!\n"
             "\tmov x29, sp\n\n"
 
             "Here, the stack pointer is decremented to create a function frame and lr and fr are\n"
