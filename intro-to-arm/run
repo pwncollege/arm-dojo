@@ -991,7 +991,7 @@ class EmbryoARMAvg(EmbryoARMBase):
             "via the stack or for dynamic stack allocations (alloca).\n\n"
 
             "Similarly, a function epilogue consists of:\n"
-            "\tldp x29, x30, [sp], 48\n"
+            "\tldp x29, x30, [sp], #48\n"
             "\tret\n\n"
 
             "which restores lr, fr and the stack before returning.\n"
