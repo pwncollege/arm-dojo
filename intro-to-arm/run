@@ -960,7 +960,8 @@ class EmbryoARMJumps(EmbryoARMBase):
 class EmbryoARMAvg(EmbryoARMBase):
     def __init__(self, asm=None):
         super().__init__(asm)
-        self.val_stk = [random.randint(1000000, 1000000000) for _ in range(8)]
+        self.avg_count = random.randint(1, 100)
+        self.val_stk = [random.randint(1000000, 1000000000) for _ in range(self.avg_count)]
         self.code_load_addr = self.BASE_ADDR + self.CODE_OFFSET
 
     def print_level_text(self):
@@ -998,15 +999,25 @@ class EmbryoARMAvg(EmbryoARMBase):
 
             "Write a function that calculates an average.\n"
             "Your assembly should be a FUNCTION that will be called, and is expected to return.\n"
+
+            "Your function should be of the form calc_avg(ptr, count)\n"
+            "where:\n"
+            "- ptr is the start of the array\n"
+            "- count is the number of 64 bit numbers in the array\n"
+
             f"Eight values have been written to {hex(self.BASE_STACK)}.\n"
         )
 
     def unit_test_user_code(self):
 
-        # movk is not needed, but for completeness
         self.harness = pwnlib.asm.asm(f"""
-                            mov x3, #{hex(self.code_load_addr & 0xFFFFFFFF)}
-                            movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFFFFFF)}, lsl 32
+                            mov x0, #{hex(self.BASE_STACK & 0xFFFF)}
+                            movk x0, #{hex((self.BASE_STACK & 0xFFFF0000) >> 16)}, lsl 16
+                            movk x0, #{hex((self.BASE_STACK & 0xFFFF00000000) >> 32)}, lsl 32
+                            movk x0, #{hex((self.BASE_STACK & 0xFFFF000000000000) >> 48)}, lsl 48
+                            mov x1, #{hex(self.avg_count)}
+                            mov x3, #{hex(self.code_load_addr & 0xFFFF)}
+                            movk x3, #{hex((self.code_load_addr & 0xFFFF0000) >> 16)}, lsl 16
                             blr x3
                             """)
 
@@ -1014,7 +1025,7 @@ class EmbryoARMAvg(EmbryoARMBase):
 
         try:
             self.emu.mem_write(
-                self.BASE_STACK, struct.pack("<QQQQQQQQ", *self.val_stk)
+                self.BASE_STACK, struct.pack(f"<{'Q' * self.avg_count}", *self.val_stk)
             )
 
             self.emu.mem_write(self.LIB_ADDR, self.harness)
@@ -1034,11 +1045,12 @@ class EmbryoARMAvg(EmbryoARMBase):
         correct = val_x0 == avg(self.val_stk) and stack_fixed
 
         if not correct:
-            print(f"""nope, expected value {avg(self.val_stk)} but got {val_x0}\n""")
+            print(f"""nope, expected value {hex(avg(self.val_stk))} but got {hex(val_x0)}\n""")
             # mem = self.emu.mem_read(self.BASE_STACK, 64)
             # yep = [mem[i:i+8] for i in range(0, 64, 8)]
             # for i in yep: print(pwnlib.util.packing.u64(i))
             self.debug_output()
+            print(f"values: {[hex(val) for val in self.val_stk]}")
 
         return correct
 
