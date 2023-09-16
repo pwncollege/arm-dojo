@@ -976,7 +976,7 @@ class EmbryoARMAvg(EmbryoARMBase):
             "and any needed values in x0 - x15.\n\n"
 
             "Registers x16 - x18 will be discussed later.\n"
-            "Registers x19 - x28 are caller saved.\n"
+            "Registers x19 - x28 are callee saved.\n"
             "The saved return address is stored in a special link register lr (aka x30).\n"
             "The saved frame pointer is stored in a special frame register fr (aka x29).\n\n"
 
@@ -1066,7 +1066,7 @@ class EmbryoARMFib(EmbryoARMBase):
             "and any needed values in x0 - x15.\n\n"
 
             "Registers x16 - x18 will be discussed later.\n"
-            "Registers x19 - x28 are caller saved.\n"
+            "Registers x19 - x28 are callee saved.\n"
             "The saved return address is stored in a special link register lr (aka x30).\n"
             "The saved frame pointer is stored in a special frame register fr (aka x29).\n\n"
 
