@@ -1004,8 +1004,6 @@ class EmbryoARMAvg(EmbryoARMBase):
             "where:\n"
             "- ptr is the start of the array\n"
             "- count is the number of 64 bit numbers in the array\n"
-
-            f"Eight values have been written to {hex(self.BASE_STACK)}.\n"
         )
 
     def unit_test_user_code(self):
