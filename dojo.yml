@@ -59,8 +59,11 @@ modules:
       - id: jumps
         name: Level13
         description: The branch instruction.
-      - id: fib
+      - id: avg
         name: Level14
+        description: Write an average function.
+      - id: fib
+        name: Level15
         description: Write a fib function.
     resources:
       - name: "General Tips"

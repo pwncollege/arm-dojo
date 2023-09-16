@@ -28,7 +28,7 @@ LEVELS = [
     # Bits in Registers
     "EmbryoARMBitShift",
 
-    # Memory Access 
+    # Memory Access
     "EmbryoARMMemoryAccess",
     "EmbryoARMMemoryAccessPairs",
 
@@ -42,6 +42,7 @@ LEVELS = [
     "EmbryoARMJumps",
 
     # Functions
+    "EmbryoARMAvg",
     "EmbryoARMFib",
     ]
 
@@ -956,6 +957,96 @@ class EmbryoARMJumps(EmbryoARMBase):
             and self.val == self.emu.reg_read(UC_ARM64_REG_X1)
         )
 
+class EmbryoARMAvg(EmbryoARMBase):
+    def __init__(self, asm=None):
+        super().__init__(asm)
+        self.val_stk = [random.randint(1000000, 1000000000) for _ in range(8)]
+        self.code_load_addr = self.BASE_ADDR + self.CODE_OFFSET
+
+    def print_level_text(self):
+        print(
+            "Function calls in aarch64 are done with the branch and link instruction bl.\n"
+            "The functions return value is stored in register x0.\n\n"
+
+            "The bl instruction:\n"
+            "\tt- does a PC relative jump the specified location\n"
+            "\t- and stores the return address in the link register lr (aka x30)\n\n"
+            
+            "It is the caller's responsibility to store the existing lr value frame pointer\n"
+            "and any needed values in x0 - x15.\n\n"
+
+            "Registers x16 - x18 will be discussed later.\n"
+            "Registers x19 - x28 are caller saved.\n"
+            "The saved return address is stored in a special link register lr (aka x30).\n"
+            "The saved frame pointer is stored in a special frame register fr (aka x29).\n\n"
+
+            "Given the role of x29 and x30, it is common to see a function prologue similar to:\n"
+            "\tstp x29, x30, [sp, #-48]!\n"
+            "\tmov x29, sp\n\n"
+
+            "Here, the stack pointer is decremented to create a function frame and lr and fr are\n"
+            "stored on the stack.  The last instruction shown sets the frame pointer.  Note that\n"
+            "the stack pointer and frame pointer are equal in this case.  local variables are stored\n"
+            "ABOVE the frame pointer.  The stack pointer may decrement further when passing arguments\n"
+            "via the stack or for dynamic stack allocations (alloca).\n\n"
+
+            "Similarly, a function epilogue consists of:\n"
+            "\tldp x29, x30, [sp], 48\n"
+            "\tret\n\n"
+
+            "which restores lr, fr and the stack before returning.\n"
+
+            "Write a function that calculates an average.\n"
+            "Your assembly should be a FUNCTION that will be called, and is expected to return.\n"
+            f"Eight values have been written to {hex(self.BASE_STACK)}.\n"
+        )
+
+    def unit_test_user_code(self):
+
+        # movk is not needed, but for completeness
+        self.harness = pwnlib.asm.asm(f"""
+                            mov x3, #{hex(self.code_load_addr & 0xFFFFFFFF)}
+                            movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFFFFFF)}, lsl 32
+                            blr x3
+                            """)
+
+        self.create_emu()
+
+        try:
+            self.emu.mem_write(
+                self.BASE_STACK, struct.pack("<QQQQQQQQ", *self.val_stk)
+            )
+
+            self.emu.mem_write(self.LIB_ADDR, self.harness)
+            self.emu.emu_start(self.LIB_ADDR, self.LIB_ADDR + len(self.harness))
+
+        except UcError as e:
+            print("ERROR: %s" % e)
+            self.debug_output()
+
+        stack_fixed = self.emu.reg_read(UC_ARM64_REG_SP) == self.RSP_INIT
+
+        def avg(arr):
+            return int(sum(i for i in arr)/len(arr))
+
+
+        val_x0 = self.emu.reg_read(UC_ARM64_REG_X0)
+        correct = val_x0 == avg(self.val_stk) and stack_fixed
+
+        if not correct:
+            print(f"""nope, expected value {avg(self.val_stk)} but got {val_x0}\n""")
+            # mem = self.emu.mem_read(self.BASE_STACK, 64)
+            # yep = [mem[i:i+8] for i in range(0, 64, 8)]
+            # for i in yep: print(pwnlib.util.packing.u64(i))
+            self.debug_output()
+
+        return correct
+
+    def trace(self):
+        for _ in range(100):
+            if not self.unit_test_user_code():
+                return False
+        return True
 
 class EmbryoARMFib(EmbryoARMBase):
     def __init__(self, asm=None):
