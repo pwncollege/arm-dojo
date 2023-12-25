@@ -1105,9 +1105,9 @@ class EmbryoARMFib(EmbryoARMBase):
         # movk is not needed, but for completeness
         self.harness = pwnlib.asm.asm(f"""
                             mov x3, #{hex(self.code_load_addr & 0xFFFF)}
-                            movk x3, #{hex((self.code_load_addr >> 16) & 0xFFFF0000)}, lsl 16
-                            movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFF00000000)}, lsl 32
-                            movk x3, #{hex((self.code_load_addr >> 48) & 0xFFFF000000000000)}, lsl 48
+                            movk x3, #{hex((self.code_load_addr >> 16) & 0xFFFF)}, lsl 16
+                            movk x3, #{hex((self.code_load_addr >> 32) & 0xFFFF)}, lsl 32
+                            movk x3, #{hex((self.code_load_addr >> 48) & 0xFFFF)}, lsl 48
                             blr x3
                             """)
 
