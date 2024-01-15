@@ -705,7 +705,7 @@ class EmbryoARMMemoryAccessArraySixInstr(EmbryoARMBase):
             "set x0 to the sum computed\n\n"
 
             "We will now set the following in preparation for your code:\n"
-            f"\t- [{hex(self.arr_addr)}:{hex(self.arr_addr + (self.arr_len * 8))}] = {{n qwords]}}\n"
+            f"\t- [{hex(self.arr_addr)}:{hex(self.arr_addr + (self.arr_len * 8))}] = {{n qwords}}\n"
             f"\t- X0 = {hex(self.arr_addr)}\n"
             f"\t- X1 = {self.arr_len}\n"
         )
