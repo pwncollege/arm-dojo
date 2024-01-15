@@ -1098,6 +1098,10 @@ class EmbryoARMFib(EmbryoARMBase):
 
             "Write a recursive fibonacci function.\n"
             "Your assembly should be a FUNCTION that will be called, and is expected to return.\n"
+
+            "Your function should be of the form fib(pos)\n"
+            "where:\n"
+            "- pos is position in the fibonacci sequence\n"
         )
 
     def unit_test_user_code(self, fib_arg):
@@ -1136,11 +1140,8 @@ class EmbryoARMFib(EmbryoARMBase):
         correct = val_x0 == fib(fib_arg) and stack_fixed
 
         if not correct:
-            print(
-            """
-            nope
-            """
-            )
+            print(f"""nope, expected value {hex(fib(fib_arg))} but got {hex(val_x0)}\n""")
+            self.debug_output()
 
         return correct
 
