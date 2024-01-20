@@ -6,18 +6,18 @@ award:
   emoji: 🦾
 
 description: |
-  This dojo consists of misc topics that interest robwaz, but
-  aren't part of the core pwn.college curriculum.
+  ARM processors are a competitor to the intel processors most of the dojo focuses on.
+  Dominating the mobile computing space, these chips excel at power-efficient processing.
+  Recently, ARM processors can also be found in personal computers, with Apple's
+  M1 and M2 chips serving as notable examples.
+
+  This is an open-source community dojo exploring the aarch64 architecture.
+  Pull requests are welcome! https://github.com/robwaz/arm-dojo
 
 modules:
   - id: intro-to-arm
     name: Introduction to ARM
     description: |
-      ARM processors are a competitor to the intel processors most of the dojo focuses on.
-      Dominating the mobile computing space, these chips excel at power-efficient processing.
-      Recently, ARM processors can also be found in personal computers, with Apple's
-      M1 and M2 chips serving as notable examples.
-
       Unlike amd64, ARM assembly (aarch64) is a RISC architecture with a small number of fast
       instructions.  This module provides a short crash-course to get familiar with some of
       the key differences in aarch64.  Drawing directly from the "Assembly Crash Course" module
