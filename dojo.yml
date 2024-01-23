@@ -1,6 +1,7 @@
 id: robwaz-dojo
 
 name: ARM Dojo
+type: public
 
 award:
   emoji: 🦾
