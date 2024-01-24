@@ -268,7 +268,7 @@ class EmbryoARMLineEquation(EmbryoARMBase):
 
     def print_level_text(self):
         print(
-                "Arithmatic instructions take three arguments\n"
+                "Arithmetic instructions take three arguments\n"
                 "Example:\n"
                 "\t add x0, x1, x2\n\n"
                 "This example is equivalent to x0 = x1 + x2\n"
