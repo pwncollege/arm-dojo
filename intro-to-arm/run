@@ -388,8 +388,8 @@ class EmbryoARMModulo(EmbryoARMBase):
         )
 
     def trace(self):
-        if  len(self.asm) != 8:
-            print(f"Maximum of 2 instruction aarch64 instructions!  {len(self.asm)} bytes received, but expecting 8!")
+        if  len(self.asm) > 8:
+            print(f"Maximum of 2 instruction aarch64 instructions!  {len(self.asm)} bytes received, but expecting maximum of 8!")
             return False
         try:
             self.emu.reg_write(UC_ARM64_REG_X0, self.val_x0)
