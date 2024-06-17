@@ -970,7 +970,7 @@ class EmbryoARMAvg(EmbryoARMBase):
             "The functions return value is stored in register x0.\n\n"
 
             "The bl instruction:\n"
-            "\tt- does a PC relative jump the specified location\n"
+            "\t- does a PC relative jump the specified location\n"
             "\t- and stores the return address in the link register lr (aka x30)\n\n"
             
             "It is the caller's responsibility to store the existing lr value frame pointer\n"
@@ -1069,7 +1069,7 @@ class EmbryoARMFib(EmbryoARMBase):
             "The functions return value is stored in register x0.\n\n"
 
             "The bl instruction:\n"
-            "\tt- does a PC relative jump the specified location\n"
+            "\t- does a PC relative jump the specified location\n"
             "\t- and stores the return address in the link register lr (aka x30)\n\n"
             
             "It is the caller's responsibility to store the existing lr value frame pointer\n"
