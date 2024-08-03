@@ -1,5 +1,6 @@
 #!/opt/pwn.college/python
 
+import os
 import pathlib
 import random
 import struct
@@ -17,6 +18,8 @@ pwnlib.context.context.update(arch = 'aarch64')
 
 config = (pathlib.Path(__file__).parent / ".config").read_text()
 level = int(config)
+
+os.setuid(os.geteuid())
 
 LEVELS = [
     # Registers
