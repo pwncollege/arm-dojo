@@ -851,6 +851,10 @@ class EmbryoARMRegSwap(EmbryoARMBase):
             f"X0 = {hex(self.val_x0)}\n"
             f"X1 = {hex(self.val_x1)}\n\n"
         )
+        print(
+                "\n"
+                "HINT: You have already used the necessary instructions in previous levels!"
+        )
 
     def trace(self):
         if len(self.asm) > 8:
