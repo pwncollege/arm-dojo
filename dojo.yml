@@ -13,7 +13,7 @@ description: |
   M1 and M2 chips serving as notable examples.
 
   This is an open-source community dojo exploring the aarch64 architecture.
-  Pull requests are welcome! https://github.com/robwaz/arm-dojo
+  Pull requests are welcome! https://github.com/pwncollege/arm-dojo
 
 modules:
   - id: intro-to-arm
