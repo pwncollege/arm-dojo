@@ -97,3 +97,4 @@ modules:
         type: markdown
         content: |
           - [Official ARMv8 Documentation](https://developer.arm.com/documentation/den0024/a/)
+          - [ARM aarch64 Instruction Set Guide](https://developer.arm.com/documentation/102374/0101/Overview)
