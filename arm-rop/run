@@ -1,2 +1,2 @@
-#!/opt/pwn.college/bash
-/usr/bin/qemu-aarch64-static /challenge/level-*
+#!/run/dojo/bin/bash-suid
+/run/workspace/bin/env -i /usr/bin/qemu-aarch64-static /challenge/level-*

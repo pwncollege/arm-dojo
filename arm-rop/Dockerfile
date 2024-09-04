@@ -9,4 +9,7 @@ run apt-get update && apt-get upgrade -y
 run apt-get install -y qemu-user-static libc6-dev-amd64-cross binutils-aarch64-linux-gnu
 run apt-get install -y libc6:arm64 libcapstone-dev:arm64
 
+# install tools
+run apt-get install -y gdb-multiarch sudo
+
 
