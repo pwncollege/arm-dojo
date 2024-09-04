@@ -103,7 +103,25 @@ modules:
     name: ARM ROP
     image: adamdoupe/arm-rop
     description: |
-      ARM64 has a number of differences in the calling convention, prologs, and epilogs that cause ROP to be different than on x86_64.
+      ARM64 has a number of differences in the calling convention, prologues, and epilogues that cause ROP to be different than on x86_64.
+
+      Because these challenges are running on an x86-64 host, you might need any of the `aarch64-linux-gnu-*` tools, such as `aarch64-linux-gnu-objdump`.
+
+      gdb is now a 2-step process:
+
+        In one terminal / tmux window:
+
+        ```
+        $ /usr/bin/qemu-aarch64-static -g 1234 /challenge/level-1-0
+        ```
+
+        In another:
+
+        ```
+        $ gdb-multiarch /challenge/level-1-0
+        (gdb) target remote localhost:1234
+        ```
+        
     visibility:
       start: "2024-09-04T20:00:00-07:00"
     challenges:
