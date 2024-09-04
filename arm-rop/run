@@ -1,2 +1,2 @@
 #!/usr/bin/env bash-suid
-/run/workspace/bin/env -i /usr/bin/qemu-aarch64-static /challenge/level-*
+/usr/bin/env -i /usr/bin/qemu-aarch64-static /challenge/level-*
