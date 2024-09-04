@@ -111,13 +111,13 @@ modules:
 
         In one terminal / tmux window:
 
-        ```
+        ```bash
         $ /usr/bin/qemu-aarch64-static -g 1234 /challenge/level-1-0
         ```
 
         In another:
 
-        ```
+        ```bash
         $ gdb-multiarch /challenge/level-1-0
         (gdb) target remote localhost:1234
         ```
