@@ -127,26 +127,55 @@ modules:
     challenges:
       - id: level-1-0
         name: level-1-0
-        description: TODO
+        description: |
+          The goal of this level is quite simple: redirect control flow to the win function.
       - id: level-1-1
         name: level-1-1
-        description: TODO real
+        description: |
+          The goal of this level is quite simple: redirect control flow to the win function.
       - id: level-2-0
         name: level-2-0
-        description: TODO
+        description: |
+          Now let's see about redirect control flow to multiple functions.
       - id: level-2-1
         name: level-2-1
-        description: TODO real
+        description: |
+          Now let's see about redirect control flow to multiple functions.
       - id: level-3-0
         name: level-3-0
-        description: TODO
+        description: |
+          What about passing arguments to multiple functions?
       - id: level-3-1
         name: level-3-1
-        description: TODO real
+        description: |
+          What about passing arguments to multiple functions?
+      - id: level-3-0-a
+        name: level-3-0-a
+        description: |
+          If you did the last one correctly this should be easy.
+      - id: level-3-1-a
+        name: level-3-1-a
+        description: |
+          If you did the last one correctly this should be easy.
       - id: level-4-0
         name: level-4-0
-        description: TODO
+        description: |
+          Now, let's just pop stuff
       - id: level-4-1
         name: level-4-1
-        description: TODO real
+        description: |
+          Now, let's just pop stuff
+      - id: static-binary-rop
+        name: static-binary-rop
+        description: |
+          Now that you have the hang of things, how about you pop a statically compiled binary with no inserted gadgets? 
+      - id: level-3-1-a-gcc
+        name: level-3-1-a-gcc
+        description: |
+          Other compilers are different, let's now do a few levels that are compiled by gcc instead of clang to see the difference.
+      - id: level-4-1-gcc
+        name: level-4-1-gcc
+        description: |
+          Other compilers are different, let's now do a few levels that are compiled by gcc instead of clang to see the difference.
+
     
