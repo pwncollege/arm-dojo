@@ -100,7 +100,7 @@ modules:
           - [ARM aarch64 Instruction Set Guide](https://developer.arm.com/documentation/102374/0101/Overview)
 
   - id: arm-rop
-    name: ARM ROP
+    name: ARM64 ROP
     image: adamdoupe/arm-rop
     description: |
       ARM64 has a number of differences in the calling convention, prologues, and epilogues that cause ROP to be different than on x86_64.
