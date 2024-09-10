@@ -169,13 +169,13 @@ modules:
         name: static-binary-rop
         description: |
           Now that you have the hang of things, how about you pop a statically compiled binary with no inserted gadgets? 
-      - id: level-3-1-a-gcc
-        name: level-3-1-a-gcc
-        description: |
-          Other compilers are different, let's now do a few levels that are compiled by gcc instead of clang to see the difference.
       - id: level-4-1-gcc
         name: level-4-1-gcc
         description: |
           Other compilers are different, let's now do a few levels that are compiled by gcc instead of clang to see the difference.
+      - id: level-3-1-a-gcc
+        name: hard-level-3-1-a-gcc
+        description: |
+          It seems that compilers can do very strange things, including breaking things, yet I have faith in the hackers...
 
     
