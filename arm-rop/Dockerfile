@@ -19,7 +19,11 @@ run apt-get install -y libc6-dev-amd64-cross binutils-aarch64-linux-gnu
 run apt-get install -y libc6:arm64 libcapstone-dev:arm64
 
 # install tools
-run apt-get install -y gdb-multiarch sudo file gcc-aarch64-linux-gnu tmux screen byobu
+run apt-get install -y gdb-multiarch sudo file gcc-aarch64-linux-gnu tmux screen byobu rsync
+
+# change the user to make things easier
+run usermod -md /home/hacker -l hacker ubuntu && groupmod -n hacker ubuntu
+
 
 # Install rop stuff
 # run apt-get install -y python3-pip python3-capstone python3-filebytes python3-keystone-engine python3-ropper python3-pyvex
