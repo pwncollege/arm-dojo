@@ -1,2 +1,2 @@
-#!/usr/bin/env bash-suid
+#!/usr/bin/exec-suid -- /bin/bash -p
 /usr/bin/env -i /usr/bin/qemu-aarch64-static /challenge/level-*
