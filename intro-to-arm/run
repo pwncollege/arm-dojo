@@ -792,7 +792,7 @@ class EmbryoARMPopPush(EmbryoARMBase):
 
             "Pushing to the stack would be of the form\n"
             "\tstr x1, [sp, #-16]!\n\n"
-            "This places subtracts 16 from the stack pointer and then stores the value in x1 at sp.\n"
+            "This subtracts 16 from the stack pointer and then stores the value in x1 at sp.\n"
 
             "Note: In aarch64, the stack pointer must be 16 byte aligned!  Accessing the stack pointer when it is\n"
             "not properly aligned will result in a fault!\n\n"
