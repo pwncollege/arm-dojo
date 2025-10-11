@@ -321,7 +321,7 @@ class EmbryoARMLineEquationSingleInstr(EmbryoARMBase):
 
     def print_level_text(self):
         print(
-            "aarch64 instructions can have multiple arguments and perform multiple actions.."
+            "aarch64 instructions can have multiple arguments and perform multiple actions."
             "Please compute the following:\n"
             "f(x) = mx + b, where:\n"
             "\tm = X0\n"
